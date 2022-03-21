@@ -1,0 +1,36 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<div class="container">
+  <div class='row'>
+
+<div class= "col-md-3">
+ <%= render 'book', book:@book_new, user:@user_id %>
+</div>
+<div class= "col-md-8 offset-md-1">
+    <h2>Book detail</h2>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                  <%= link_to user_path(@book.user_id) do %>
+                    <%= image_tag @book.user.get_image %>
+                  <% end %>
+                  <%= link_to user_path(@book.user_id) do %>
+                    <%= @book.user.name %>
+                  <% end %>
+                </td>
+                <td><%= link_to @book.title,book_path(@book)%></td>
+                <td><%= @book.body %></td>
+
+                <% if @book.user == current_user %>
+                <td><%= link_to "Edit", edit_book_path(@book) %></td>
+                <td><%= link_to "Destroy", book_path(@book), method: :delete %></td>
+                <% end %>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
